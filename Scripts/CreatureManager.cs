@@ -139,13 +139,14 @@ public class CreatureManager : MonoBehaviour {
 
   void ReloadScene() {
     FadeOutScreen();
+    //StartCoroutine(FadeOutScreen());
     SceneManager.LoadScene(0);
   }
 
-  void FadeOutScreen() { //send OSC to VDMX to fade out the screen
+  void FadeOutScreen() { //send OSC to VDMX to fade out the screen 
     float fadeOutStep = 0.001f;
     float fadeOutCount;
-    for (int i = 0; i < 1001; i++) {
+    for (int i = 0; i < 1001; i++) { //not the best solution but does the job better than its alternative below
       fadeOutCount = 1.0f - i * fadeOutStep;
       print(fadeOutCount);
       client.Send("/test", fadeOutCount);
@@ -153,4 +154,17 @@ public class CreatureManager : MonoBehaviour {
     print("fading out");
     client.Dispose();
   }
+
+  //IEnumerator FadeOutScreen() {
+  //  float FadeOutStep = 0.05f;
+  //  float fadeOutCount;
+  //  for (int i = 0; i < 21; i++) {
+  //    yield return new WaitForSeconds(0.1f);
+  //    fadeOutCount = 1.0f - i * FadeOutStep;
+  //    print(fadeOutCount);
+  //    client.Send("/test", fadeOutCount);
+  //  }
+  //  print("fading out");
+  //  client.Dispose();
+  //}
 }

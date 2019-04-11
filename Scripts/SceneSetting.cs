@@ -18,7 +18,8 @@ public class SceneSetting : MonoBehaviour {
   void Start() {
     client = new OscClient("127.0.0.1", 9000);
     CreateStar();
-    FadeInScreen();
+    //FadeInScreen();
+    StartCoroutine(FadeInScreen());
   }
 
   private void CreateStar() { 
@@ -35,15 +36,29 @@ public class SceneSetting : MonoBehaviour {
     return random;
    }
 
-  private void FadeInScreen() {
-    float FadeInStep = 0.001f;
+  IEnumerator FadeInScreen() {
+    float FadeInStep = 0.05f;
     float fadeInCount;
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 21; i++) {
+      yield return new WaitForSeconds(0.1f);
       fadeInCount = i * FadeInStep;
+      print(fadeInCount);
       client.Send("/test", fadeInCount);
     }
     print("fading in");
     client.Dispose();
   }
+
+  //private void FadeInScreen() {
+  //  float FadeInStep = 0.001f;
+  //  float fadeInCount;
+  //  for (int i = 0; i < 1000; i++) {
+  //    fadeInCount = i * FadeInStep;
+  //    print(fadeInCount);
+  //    client.Send("/test", fadeInCount);
+  //  }
+  //  print("fading in");
+  //  client.Dispose();
+  //}
 }
 
