@@ -1,4 +1,4 @@
-# OrientationProject
+# Fantasynth
 
 Semester Project I WS 18/19.
 
